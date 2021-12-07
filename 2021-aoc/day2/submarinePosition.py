@@ -4,18 +4,30 @@ import os
 
 
 class Solution(object):
-    def countDepth(inputList):
+    def readInstructions(inputList):
         """
         :type list: list
         :rtype: int
         """
+        horizontal = 0
+        depth = 0
+        for entry in inputList:
+            direction, distance = entry.split()
+            if direction == "forward":
+                horizontal += int(distance)
+            if direction == "down":
+                depth += int(distance)
+            if direction == "up":
+                depth -= int(distance)
+        finalPosition = horizontal*depth
+        return finalPosition
 
     def readFile(inputFile):
         with open(inputFile) as f:
             read_data = f.readlines()
             # print((read_data))
         f.closed
-        print(read_data)
+        # print(read_data)
         return read_data
 
     def readFileFromOS(fileName):
@@ -24,18 +36,10 @@ class Solution(object):
         f.closed
         return read_data
 
-    def readFileRando(fileName):
-        with open(fileName) as input:
-            read_data = [int(line.strip()) for line in input]
-        input.closed
-        print(read_data)
-        return read_data
-
 
 def main():
-    # inputFile = sys.argv[1]
-    fileContent = Solution.readFile("input6.txt")
-
+    fileContent = Solution.readFile("input1000.txt")
+    print(Solution.readInstructions(fileContent))
 
 if __name__ == "__main__":
     main()
