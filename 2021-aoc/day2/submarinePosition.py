@@ -11,21 +11,22 @@ class Solution(object):
         """
         horizontal = 0
         depth = 0
+        aim = 0
         for entry in inputList:
             direction, distance = entry.split()
             if direction == "forward":
                 horizontal += int(distance)
+                depth += aim * int(distance)
             if direction == "down":
-                depth += int(distance)
+                aim += int(distance)
             if direction == "up":
-                depth -= int(distance)
+                aim -= int(distance)
         finalPosition = horizontal*depth
         return finalPosition
 
     def readFile(inputFile):
         with open(inputFile) as f:
             read_data = f.readlines()
-            # print((read_data))
         f.closed
         # print(read_data)
         return read_data
@@ -38,8 +39,9 @@ class Solution(object):
 
 
 def main():
-    fileContent = Solution.readFile("input1000.txt")
+    fileContent = Solution.readFileFromOS("input1000.txt")
     print(Solution.readInstructions(fileContent))
+
 
 if __name__ == "__main__":
     main()
